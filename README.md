@@ -167,25 +167,7 @@ Official list for **NOVA IMS 2025–2026**
 
 ---
 
-## 8. Recommended Testing For Academic Services
-
-Academic Services should compile the template for:
-
-- every programme  
-- every specialization  
-- both languages (PT and EN when available)
-
-Check for:
-
-- missing images  
-- correct cover alignment  
-- margins and typography  
-- abstract page language  
-- adviser labels (Supervised by / Orientada por)
-
----
-
-## 9. Contact
+## 8. Contact
 
 Template adaptation (2025–2026):  
 **Paulo Vitor de Campos Souza**  
