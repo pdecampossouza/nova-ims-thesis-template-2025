@@ -119,7 +119,7 @@ Official list for **NOVA IMS 2025–2026**
 | Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name |
 |--------------------------|---------------------------------------|--------------|
 | `megi`                   | `agi`                                 | Applied Geographic Information |
-| `megi`                   | `agr`                                 | Agribusiness |
+| `megi`                   | `agr`                                 | Risk and analisys Management |
 | `megi`                   | `mrcrm`                               | Marketing Research and CRM |
 
 ---
