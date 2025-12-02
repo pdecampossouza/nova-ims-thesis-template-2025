@@ -58,7 +58,7 @@ This template mirrors the NOVAthesis structure to ensure future compatibility.
 
 ## 5. Selecting the NOVA IMS Programme and Specialization
 
-In the file `template.tex`, you will find:
+In the file `Config/1_novathesis.tex`, you will find:
 
 ```tex
 \newcommand{\imsDegree}{mgi}
