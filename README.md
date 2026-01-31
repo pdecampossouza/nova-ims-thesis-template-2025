@@ -63,6 +63,7 @@ In the file `Config/1_novathesis.tex`, you will find:
 ```tex
 \newcommand{\imsDegree}{mgi}
 \newcommand{\imsSpecialization}{bi}
+\newcommand{\ntsetup{lang=en}}
 ```
 
 These variables determine:
