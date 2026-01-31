@@ -81,71 +81,72 @@ Official list for **NOVA IMS 2025–2026**
 
 ---
 
-## 6.1 Master’s in Information Management — MGI
+## 6.1 Master's Degree Program in Information Management — MGI
 
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name |
-|--------------------------|---------------------------------------|--------------|
-| `mgi`                    | `bi`                                  | Business Intelligence |
-| `mgi`                    | `gcbi`                                | Governance of Cybersecurity and Business Intelligence |
-| `mgi`                    | `gsti`                                | Governance of Information Systems and Technologies |
-| `mgi`                    | `gsi`                                 | Geographic Information Systems |
-| `mgi`                    | `mi`                                  | Marketing Intelligence |
-| `mgi`                    | `td`                                  | Technologies for Decision |
-
----
-
-## 6.2 Master’s in Data Science and Advanced Analytics — MDSAA
-
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name |
-|--------------------------|---------------------------------------|--------------|
-| `mdsaa`                  | `ba`                                  | Business Analytics |
-| `mdsaa`                  | `ds`                                  | Data Science |
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name | Portuguese Name |
+|--------------------------|---------------------------------------|--------------|---------|
+| `mgi` | `bi` | Business Intelligence | Inteligência de Negócio |
+| `mgi` | `gcbi` | Knowledge Management and Business Intelligence | Gestão de Conhecimento e Inteligência de Negócio |
+| `mgi` | `gsti` | Information Systems Management | Gestão de Sistemas e Tecnologias de Informação |
+| `mgi` | `gsi` | Information Systems and Technlogies Management | Gestão de Sistemas de Informação |
+| `mgi` | `mi` | Marketing Intelligence | Inteligência de Marketing |
+| `mgi` | `td` | Digital Transformation | Transformação Digital |
 
 ---
 
-## 6.3 Master’s in Data-Driven Marketing — MDDM
+## 6.2 Master's Degree Program in Data Science and Advanced Analytics — MDSAA
 
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name |
-|--------------------------|---------------------------------------|--------------|
-| `mddm`                   | `dma`                                 | Digital Marketing and Analytics |
-| `mddm`                   | `ds4m`                                | Data Science for Marketing |
-| `mddm`                   | `mi`                                  | Marketing Intelligence |
-| `mddm`                   | `mrcrm`                               | Marketing Research and CRM |
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name | Portuguese Name |
+|--------------------------|---------------------------------------|--------------|---------|
+| `mdsaa` | `ba` | Business Analytics |  Métodos Analíticos para a Gestão |
+| `mdsaa` | `ds` | Data Science | Ciência de Dados |
 
 ---
 
-## 6.4 Master’s in Statistics and Information Management — MEGI
+## 6.3 Master's in Data Driven Marketing — MDDM
 
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name |
-|--------------------------|---------------------------------------|--------------|
-| `megi`                   | `agi`                                 | Applied Geographic Information |
-| `megi`                   | `agr`                                 | Risk and analisys Management |
-| `megi`                   | `mrcrm`                               | Marketing Research and CRM |
-
----
-
-## 6.5 Master’s in Geographic Information Systems and Science — MCSIG
-
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name |
-|--------------------------|---------------------------------------|--------------|
-| `mcsig`                  | `csig`                                | Geographic Information Systems and Science |
-| `mcsig`                  | `cdg`                                 | Cartography and Geographic Data |
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`)| English Name | Portuguese Name |
+|--------------------------|---------------------------------------|--------------|---------|
+| `mddm` | `dma` | Digital Marketing and Analytics | Marketing Digital e Análise de Dados |
+| `mddm` | `ds4m` | Data Science for Marketing |  Ciência de Dados Aplicada ao Marketing |
+| `mddm` | `mi` | Marketing Intelligence |  Inteligência de Marketing |
+| `mddm` | `mrcrm` | Marketing Research & CRM | Estudos de Marketing e Gestão do Relacionamento com o Cliente |
 
 ---
 
-## 6.6 Doctoral Programme in Information Management — DGI
+## 6.4 Master's Degree Program in Statistics and Information Management — MEGI
 
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | Notes |
-|--------------------------|---------------------------------------|-------|
-| `dgi`                    | `main`                                | EN and PT — shared back cover |
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name | Portuguese Name |
+|--------------------------|---------------------------------------|--------------|---------|
+| `megi` | `agi` | Data Analytics | Análise e Gestão de Informação |
+| `megi` | `agr` | Risk and Analysis Management | Análise e Gestão de Risco |
+| `megi` | `mrcrm` | Marketing Research & CRM | Estudos de Marketing e Gestão do Relacionamento com o Cliente |
 
 ---
 
-## 6.7 Master’s in Geospatial Technologies — MGT
+## 6.5 Master's Degree Program in Geographic Information Systems and Science — MCSIG
 
-| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | Notes |
-|--------------------------|---------------------------------------|-------|
-| `mgt`                    | `main`                                | Only EN version available |
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name | Portuguese Name |
+|--------------------------|---------------------------------------|--------------|---------|
+| `mcsig` | `csig` | Geographic Information Systems and Science | Ciência e Sistemas de Informação Geográfica` |
+| `mcsig` | `cdg` | Geospatial Data Science | Ciência dos Dados Geoespaciais |
+
+---
+
+## 6.6 Doctoral Program in Information Management — DGI
+
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name | Portuguese Name |
+|--------------------------|---------------------------------------|---------|-------|
+| `dgi` | `main` | `DGI-EN`, `DGI-PT` | Doctoral Program in Information Management (ENG) / Doutoramento em Gestão de Informação (PT) |
+
+---
+
+## 6.7 Master's Degree Program in Geospatial Technologies — MGT
+
+| Programme (`\imsDegree`) | Specialization (`\imsSpecialization`) | English Name | Portuguese Name |
+|--------------------------|---------------------------------------|---------|-------|
+| `mgt` | `main` | `MGT-EN` | Master's Degree Program in Geospatial Technologies (ENG) | - |
+
 
 ---
 
@@ -156,6 +157,7 @@ Official list for **NOVA IMS 2025–2026**
 ```tex
 \newcommand{\imsDegree}{mgi}
 \newcommand{\imsSpecialization}{bi}
+\newcommand{\ntsetup{lang=en}}
 ```
 
 ### Example for **MDDM — Marketing Intelligence (PT)**
@@ -163,6 +165,7 @@ Official list for **NOVA IMS 2025–2026**
 ```tex
 \newcommand{\imsDegree}{mddm}
 \newcommand{\imsSpecialization}{mi}
+\newcommand{\ntsetup{lang=pt}}
 ```
 
 ---
