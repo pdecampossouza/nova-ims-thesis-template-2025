@@ -88,8 +88,8 @@ Official list for **NOVA IMS 2025–2026**
 |--------------------------|---------------------------------------|--------------|---------|
 | `mgi` | `bi` | Business Intelligence | Inteligência de Negócio |
 | `mgi` | `gcbi` | Knowledge Management and Business Intelligence | Gestão de Conhecimento e Inteligência de Negócio |
-| `mgi` | `gsti` | Information Systems Management | Gestão de Sistemas e Tecnologias de Informação |
-| `mgi` | `gsi` | Information Systems and Technlogies Management | Gestão de Sistemas de Informação |
+| `mgi` | `gsti` | Information Systems Management | Gestão de Sistemas de Informação |
+| `mgi` | `gsi` | Information Systems and Technlogies Management | Gestão de Sistemas e Tecnologias de Informação |
 | `mgi` | `mi` | Marketing Intelligence | Inteligência de Marketing |
 | `mgi` | `td` | Digital Transformation | Transformação Digital |
 
