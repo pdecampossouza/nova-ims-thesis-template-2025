@@ -1,0 +1,33 @@
+\chapter{Literature Review}\label{ch:literature-review}
+
+[Literature review.]
+
+\section{Citations}
+
+Use \verb|\citet{key}| for a narrative citation, as in \citet{page2021}, and \verb|\citep{key}| for a parenthetical one \citep{lamport1994}. Several works: \citep{lamport1994,page2021}. With a page: \citep[p.~5]{page2021}.
+
+\section{Tables and figures}
+
+Table~\ref{tab:example} shows a table with ragged-right cells that fit the text width.
+
+\begin{table}[htbp]
+\centering
+\caption{An example table.}\label{tab:example}
+\small
+\begin{tabularx}{\textwidth}{P{3.5cm}L}
+\toprule
+Column one & Column two \\
+\midrule
+Item & A longer description that wraps onto a second line when it reaches the edge of the column. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Figures are placed in the \texttt{Figures} folder and included inside a \texttt{figure} environment with a caption and a label:
+\begin{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{name}
+  \caption{Caption text.}\label{fig:name}
+\end{figure}
+\end{verbatim}
