@@ -1,0 +1,68 @@
+% =====================================================================
+% main.tex  (main document: compile this file)
+%
+% NOVA IMS thesis template (lean version)
+%
+% Compiler: pdfLaTeX (Overleaf default). XeLaTeX and LuaLaTeX also work.
+% Bibliography: BibTeX with apacite (APA author-year style).
+% Font: Arial/Helvetica 12 pt, as in the NOVA IMS template.
+%       For 12 pt Times use  \documentclass[times]{novaims-thesis}
+%
+% Edit thesis-info.tex first (title, author, programme, cover).
+% Tip: to compile only some chapters while writing, uncomment and edit:
+% \includeonly{Chapters/1-introduction}
+% =====================================================================
+\documentclass{novaims-thesis}
+
+\input{thesis-info}
+\input{Bibliography/key-aliases}
+
+\begin{document}
+
+% ----- Cover and front matter (roman page numbers) -----
+\frontmatter
+\makecover
+\maketitlepage
+\makecopyrightpage
+\makestatement
+% Optional pages, switched in thesis-info.tex
+\makegenaiusepage{FrontMatter/genai-use}
+\makededication{FrontMatter/dedication}
+
+\input{FrontMatter/acknowledgements}
+\input{FrontMatter/abstract-en}
+\input{FrontMatter/abstract-pt}
+
+% Index (contents), Index of Tables, Index of Figures
+\clearpage
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\clearpage
+\listoftables
+\clearpage
+\listoffigures
+\input{FrontMatter/acronyms}
+
+% ----- Chapters (arabic page numbers) -----
+\mainmatter
+\pagestyle{novaims}
+
+\include{Chapters/1-introduction}
+\include{Chapters/2-literature-review}
+\include{Chapters/3-methodology}
+\include{Chapters/4-results}
+\include{Chapters/5-discussion}
+\include{Chapters/6-conclusion}
+
+% ----- Declaration, references, appendices -----
+\include{BackMatter/genai-declaration}
+
+\bibliography{Bibliography/references}
+
+\clearpage
+\appendix
+\include{Appendices/appendix-a}
+
+\makebackcover
+
+\end{document}
