@@ -82,7 +82,11 @@
 %% References: APA style (apacite), DOIs printed as links
 %% ---------------------------------------------------------------------
 \bibliographystyle{apacite}
-\addto\captionsenglish{\renewcommand{\bibname}{References}}
+\addto\captionsenglish{%
+  \renewcommand{\bibname}{References}%
+  \renewcommand{\contentsname}{Index}%
+  \renewcommand{\listtablename}{Index of Tables}%
+  \renewcommand{\listfigurename}{Index of Figures}}
 \newcommand{\nims@doi}[1]{\begingroup\urlstyle{same}%
   \href{https://doi.org/#1}{\nolinkurl{https://doi.org/#1}}\endgroup}
 \newcommand{\nims@bibsize}{\normalsize\raggedright}
@@ -215,6 +219,7 @@
 \newcommand*{\nims@author}{}
 \newcommand*{\nims@studentid}{}
 \newcommand*{\nims@programme}{}
+\newcommand*{\nims@day}{}
 \newcommand*{\nims@month}{}
 \newcommand*{\nims@year}{}
 \newcommand*{\nims@place}{Lisbon}
@@ -223,15 +228,18 @@
 \newcommand*{\nims@covercode}{MGT-EN}
 \newcommand*{\nims@partnerlogos}{}
 \newcommand*{\nims@degree}{msc}
-\newcommand*{\nims@supervisors}{}
-\newcommand*{\nims@cosupervisors}{}
+\newcommand*{\nims@supblocks}{}
 
 \newcommand{\thesistitle}[1]{\renewcommand*{\nims@title}{#1}}
 \newcommand{\thesistitlecover}[1]{\renewcommand*{\nims@covertitle}{#1}}
 \newcommand{\thesisauthor}[1]{\renewcommand*{\nims@author}{#1}}
 \newcommand{\studentid}[1]{\renewcommand*{\nims@studentid}{#1}}
 \newcommand{\programme}[1]{\renewcommand*{\nims@programme}{#1}}
-\newcommand{\submissiondate}[2]{\renewcommand*{\nims@month}{#1}\renewcommand*{\nims@year}{#2}}
+% \submissiondate[day]{month}{year}; the day is optional
+\newcommand{\submissiondate}[3][]{\renewcommand*{\nims@day}{#1}%
+  \renewcommand*{\nims@month}{#2}\renewcommand*{\nims@year}{#3}}
+% Full date as printed: "15 February 2027", or "February 2027" without a day
+\newcommand*{\nims@date}{\ifx\nims@day\@empty\else\nims@day\ \fi\nims@month\ \nims@year}
 \newcommand{\submissionplace}[1]{\renewcommand*{\nims@place}{#1}}
 \newcommand{\thesiskeywords}[1]{\renewcommand*{\nims@keywords}{#1}}
 \newcommand{\sdgs}[1]{\renewcommand*{\nims@sdgs}{#1}}
@@ -245,9 +253,19 @@
 \newcommand{\partnerlogos}[1]{\renewcommand*{\nims@partnerlogos}{#1}}
 % \degreetype{msc} (default) or \degreetype{phd}
 \newcommand{\degreetype}[1]{\renewcommand*{\nims@degree}{#1}}
-% \supervisor{Name}{Institution}   \cosupervisor{Name}{Institution}
-\newcommand{\supervisor}[2]{\g@addto@macro\nims@supervisors{#1, #2\\}}
-\newcommand{\cosupervisor}[2]{\g@addto@macro\nims@cosupervisors{#1, #2\\}}
+% Supervisors, one centred block each on the title page, in the order given:
+%   \supervisor{Name, PhD}{School\\University\\City, Country}
+%   \cosupervisor{Name, PhD}{University\\City, Country}
+\newcommand{\nims@supblock}[3]{%
+  \par{\bfseries #1\par}\vspace{2pt}#2\par#3\par\vspace{0.55cm}}
+\newcommand{\supervisor}[2]{\g@addto@macro\nims@supblocks{\nims@supblock{Supervised by:}{#1}{#2}}}
+\newcommand{\cosupervisor}[2]{\g@addto@macro\nims@supblocks{\nims@supblock{Co-supervised by:}{#1}{#2}}}
+
+% Optional front matter pages: \genaiusepage{true|false}, \dedicationpage{true|false}
+\newif\ifnims@genaiuse  \nims@genaiusetrue
+\newif\ifnims@dedication\nims@dedicationtrue
+\newcommand{\genaiusepage}[1]{\csname nims@genaiuse#1\endcsname}
+\newcommand{\dedicationpage}[1]{\csname nims@dedication#1\endcsname}
 
 % Text versions for use in the document
 \newcommand*{\printthesistitle}{\nims@title}
@@ -304,7 +322,13 @@
       {Use a folder name from Figures/Covers, for example MGT-EN or MDSAA-DS-EN.}}%
   \nims@isclassic{\nims@makecoverclassic}{\nims@makecovernew}}
 
-%% Classic Geospatial Technologies cover (Erasmus Mundus design, title typeset in the blank area)
+%% Classic Geospatial Technologies cover (Erasmus Mundus design).
+%% The artwork has one blue bar printed above the "Dissertation submitted ..."
+%% line (about 8.8 cm wide and 0.4 cm high, 23.1 cm from the top; its edges are
+%% soft, so the drawn bar uses the middle of the edge). A second bar of the
+%% same size and colour is drawn under the title, so the author's name sits
+%% between the two bars.
+\definecolor{nimsgtblue}{RGB}{65,94,248}
 \newcommand{\nims@makecoverclassic}{%
   \begingroup
   \thispagestyle{empty}%
@@ -312,11 +336,14 @@
     \AtPageLowerLeft{\includegraphics[width=\paperwidth,height=\paperheight]{\nims@coverdir/front}}%
     \AtPageUpperLeft{%
       \linespread{1}\sffamily
-      \put(\LenToUnit{1.5cm},\LenToUnit{-16.1cm}){%
-        \parbox[c]{15cm}{\raggedright\color{nimsdarkgrey}%
-          \fontsize{16.5}{21}\selectfont\bfseries\MakeUppercase{\nims@covertitle}}}%
-      \put(0,\LenToUnit{-20.2cm}){\makebox[\paperwidth][c]{\fontsize{15}{17.5}\selectfont by}}%
-      \put(0,\LenToUnit{-22.3cm}){\makebox[\paperwidth][c]{\fontsize{12}{12}\selectfont\nims@author}}%
+      % Title: bold italic capitals, last line 0.7 cm above the drawn bar
+      \put(\LenToUnit{1.49cm},\LenToUnit{-20.95cm}){%
+        \parbox[b]{15cm}{\raggedright\color{black}%
+          \fontsize{16.5}{21}\selectfont\bfseries\itshape\MakeUppercase{\nims@covertitle}}}%
+      % Drawn bar, same size and colour as the printed bar
+      \put(\LenToUnit{1.47cm},\LenToUnit{-22.01cm}){{\color{nimsgtblue}\rule{8.77cm}{0.38cm}}}%
+      % Author, between the drawn bar and the printed bar
+      \put(\LenToUnit{1.49cm},\LenToUnit{-22.72cm}){\fontsize{14}{16}\selectfont\color{black}\nims@author}%
     }%
   }%
   \null\clearpage
@@ -360,41 +387,30 @@
 %% ---------------------------------------------------------------------
 %% Title page
 %% ---------------------------------------------------------------------
+\newcommand*{\nims@titlestatement}{%
+  \ifdefstring{\nims@degree}{phd}
+    {Doctoral Thesis presented as partial requirement for obtaining the Doctor degree in \nims@programme}
+    {Master Dissertation presented as partial requirement for obtaining the Master's degree in \nims@programme}}
 \newcommand{\maketitlepage}{%
   \begingroup
   \thispagestyle{empty}%
-  \AddToShipoutPictureBG*{%
-    \AtPageUpperLeft{%
-      \linespread{1}\sffamily
-      % School and university
-      \put(0,\LenToUnit{-2.6cm}){\makebox[\paperwidth][c]{\parbox[t]{16cm}{\centering\color{nimsdarkgrey}%
-        \fontsize{10.3}{15.5}\selectfont
-        \textbf{NOVA Information Management School}\\
-        \textbf{Instituto Superior de Estatística e Gestão de Informação}\\
-        \fontsize{8.7}{15}\selectfont Universidade NOVA de Lisboa}}}%
-      % Title
-      \put(0,\LenToUnit{-10.3cm}){\makebox[\paperwidth][c]{\parbox[c]{16cm}{\centering\color{nimsdarkgrey}%
-        \fontsize{16.5}{21}\selectfont\bfseries\MakeUppercase{\nims@covertitle}}}}%
-      % Author
-      \put(0,\LenToUnit{-13.0cm}){\makebox[\paperwidth][c]{\fontsize{15}{17.5}\selectfont by}}%
-      \put(0,\LenToUnit{-14.2cm}){\makebox[\paperwidth][c]{\fontsize{12}{12}\selectfont\nims@author}}%
-      \put(0,\LenToUnit{-14.9cm}){\makebox[\paperwidth][c]{\fontsize{11}{11}\selectfont Student number \nims@studentid}}%
-      % Degree statement
-      \put(\LenToUnit{2.5cm},\LenToUnit{-17.0cm}){\parbox[t]{16cm}{\raggedright\fontsize{11.5}{16}\selectfont
-        \nims@doctype\ presented as partial requirement for obtaining the \nims@degreename\ degree in \nims@programme}}%
-      % Supervisors
-      \put(\LenToUnit{2.5cm},\LenToUnit{-19.2cm}){\parbox[t]{16cm}{\raggedright\fontsize{12}{17}\selectfont
-        {\centering\textbf{Supervised by:}\par}\vspace{1ex}%
-        \nims@supervisors
-        \ifx\nims@cosupervisors\@empty\else
-          \vspace{2ex}{\centering\textbf{Co-supervised by:}\par}\vspace{1ex}%
-          \nims@cosupervisors
-        \fi}}%
-      % Date
-      \put(0,\LenToUnit{-26.5cm}){\makebox[\paperwidth][c]{\fontsize{11}{11}\selectfont\nims@month\ \nims@year}}%
-    }%
-  }%
-  \null\clearpage
+  \sffamily\linespread{1}\selectfont\centering\color{black}%
+  \vspace*{-1.2cm}%
+  {\fontsize{11}{14.5}\selectfont\bfseries
+    NOVA Information Management School\\
+    Instituto Superior de Estatística e Gestão de Informação\\
+    Universidade Nova de Lisboa\par}
+  \vspace{0.5cm plus 1fill}
+  {\fontsize{16.5}{21}\selectfont\bfseries\MakeUppercase{\nims@covertitle}\par}
+  \vspace{1.1cm}
+  {\fontsize{12}{15}\selectfont by\par\vspace{0.3cm}\fontsize{13}{16}\selectfont\nims@author\par}
+  \vspace{1.1cm}
+  {\fontsize{11.5}{15}\selectfont\nims@titlestatement\par}
+  \vspace{0.5cm plus 1fill}
+  {\fontsize{11}{14}\selectfont\nims@supblocks}
+  \vspace{0pt plus 1fill}
+  {\fontsize{11}{14}\selectfont\nims@date\par}
+  \clearpage
   \endgroup
 }
 
@@ -403,8 +419,9 @@
 %% ---------------------------------------------------------------------
 \newcommand{\makestatement}{%
   \begingroup
-  \thispagestyle{empty}%
+  \thispagestyle{plain}%
   \setlength{\parskip}{1ex plus 1pt minus 1pt}\setlength{\parindent}{0pt}%
+  \phantomsection\addcontentsline{toc}{chapter}{Statement of Integrity}%
   \begin{center}\textbf{STATEMENT OF INTEGRITY}\end{center}
 
   I, \nims@author, hereby declare having conducted this academic work with integrity.
@@ -414,7 +431,12 @@
   from the NOVA Information Management School.
 
   \bigskip
-  \nims@place, \nims@month\ \nims@year
+  \nims@place, \nims@date
+
+  % Space for the signature
+  \vspace{2.6cm}
+  \rule{7.5cm}{0.4pt}\par
+  \nims@author
   \clearpage
   \endgroup
 }
@@ -460,12 +482,58 @@
 %% ---------------------------------------------------------------------
 %% Front-matter helpers
 %% ---------------------------------------------------------------------
-% Unnumbered front-matter chapter with a PDF bookmark (not listed in the contents)
+% Unnumbered front-matter chapter, listed in the Index with its roman page number
 \newcommand{\frontchapter}[1]{%
   \chapter*{#1}%
   \markboth{#1}{#1}%
-  \pdfbookmark[0]{#1}{front:\thepage}%
+  \phantomsection\addcontentsline{toc}{chapter}{#1}%
 }
+
+% Optional pages, switched in thesis-info.tex
+\newcommand{\makegenaiusepage}[1]{\ifnims@genaiuse\input{#1}\fi}
+\newcommand{\makededication}[1]{%
+  \ifnims@dedication
+    \clearpage\thispagestyle{plain}\pdfbookmark[0]{Dedication}{dedication}%
+    \null\vspace{0.3\textheight}%
+    \begin{flushright}\itshape\input{#1}\end{flushright}%
+    \clearpage
+  \fi}
+
+% "Use of Generative Artificial Intelligence" table (NOVA IMS front matter).
+% One row per task:  \genairow{Task}{yes|no|}{Tool(s) used}
+% An empty second argument leaves both NO and YES blank.
+% The rows are counted first, then each row gets an equal share of the free
+% height, so the table fills the rest of the page.
+\newcounter{nims@genairows}
+\newlength{\nims@genairowh}
+% Height used by the chapter heading, the table header row and a small margin
+\newlength{\nims@genaihead}\setlength{\nims@genaihead}{5.4cm}
+\newlength{\nims@genaitaskw}
+\NewDocumentEnvironment{genaiuse}{+b}{%
+  \frontchapter{Use of Generative Artificial Intelligence}%
+  \setcounter{nims@genairows}{0}%
+  \sbox0{\def\genairow##1##2##3{\stepcounter{nims@genairows}}#1}%
+  \setlength{\nims@genairowh}{\dimexpr(\textheight-\nims@genaihead)/\value{nims@genairows}\relax}%
+  \ifdim\nims@genairowh>2.2cm\setlength{\nims@genairowh}{2.2cm}\fi
+  % Task column takes the width left after NO, YES (1.2 cm each) and the tool column (4.4 cm)
+  \setlength{\nims@genaitaskw}{\dimexpr\textwidth-2.4cm-4.4cm-8\tabcolsep-5\arrayrulewidth\relax}%
+  % Every cell is a box of the row height with its content centred vertically
+  \def\nims@gcell##1##2##3{\parbox[c][##1][c]{##2}{\linespread{1}\selectfont##3}}%
+  \def\genairow##1##2##3{%
+    \nims@gcell{\nims@genairowh}{\nims@genaitaskw}{\raggedright ##1} &
+    \nims@gcell{\nims@genairowh}{1.2cm}{\centering\ifstrequal{##2}{no}{X}{}} &
+    \nims@gcell{\nims@genairowh}{1.2cm}{\centering\ifstrequal{##2}{yes}{X}{}} &
+    \nims@gcell{\nims@genairowh}{4.4cm}{\raggedright ##3}\tabularnewline\hline}%
+  \noindent
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \nims@gcell{1.25cm}{\nims@genaitaskw}{\bfseries Tasks} &
+  \nims@gcell{1.25cm}{1.2cm}{\centering\bfseries NO} &
+  \nims@gcell{1.25cm}{1.2cm}{\centering\bfseries YES} &
+  \nims@gcell{1.25cm}{4.4cm}{\raggedright\bfseries Generative Artificial Intelligence}\tabularnewline\hline
+  #1
+  \end{tabular}\par
+}{}
 % Unnumbered chapter that is listed in the contents (used for the AI declaration)
 \newcommand{\unnumberedchapter}[1]{%
   \chapter*{#1}%

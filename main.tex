@@ -23,20 +23,24 @@
 \frontmatter
 \makecover
 \maketitlepage
-\makestatement
 \makecopyrightpage
+\makestatement
+% Optional pages, switched in thesis-info.tex
+\makegenaiusepage{FrontMatter/genai-use}
+\makededication{FrontMatter/dedication}
 
 \input{FrontMatter/acknowledgements}
 \input{FrontMatter/abstract-en}
 \input{FrontMatter/abstract-pt}
 
+% Index (contents), Index of Tables, Index of Figures
 \clearpage
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
 \clearpage
-\listoffigures
-\clearpage
 \listoftables
+\clearpage
+\listoffigures
 \input{FrontMatter/acronyms}
 
 % ----- Chapters (arabic page numbers) -----

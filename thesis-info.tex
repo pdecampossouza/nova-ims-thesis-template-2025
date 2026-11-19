@@ -21,11 +21,17 @@
 % msc (dissertation, default) or phd (doctoral thesis)
 \degreetype{msc}
 
-\supervisor{Supervisor Name}{NOVA Information Management School}
-% \cosupervisor{Co-supervisor Name}{Institution}
+% Supervisors: one centred block each on the title page, in this order.
+%   \supervisor{Name, degree}{School\\University\\City, Country}
+%   \cosupervisor{Name, degree}{University\\City, Country}
+% Each line of the second argument is one line of the block. Delete the
+% co-supervisor line if there is none, or repeat it for more.
+\supervisor{Supervisor Name, PhD}{NOVA Information Management School\\Universidade Nova de Lisboa\\Lisbon, Portugal}
+\cosupervisor{Co-supervisor Name, PhD}{School or Department\\University\\City, Country}
 
-% Month and year of submission (title page and statement of integrity)
-\submissiondate{Month}{Year}
+% Date of submission (title page and statement of integrity): [day]{month}{year}
+% The day is optional: \submissiondate{Month}{Year} prints only month and year.
+\submissiondate[Day]{Month}{Year}
 \submissionplace{Lisbon}
 
 \thesiskeywords{Keyword one; keyword two; keyword three}
@@ -43,3 +49,9 @@
 % Geospatial Technologies (with \covercode{MGT-2025-EN}):
 % \partnerlogos{Logos/uji,Logos/uni-muenster,Logos/erasmus-plus}
 % \partnerlogoscale{Logos/uji}{0.8}
+
+% Optional front matter pages (true or false)
+%   Use of Generative Artificial Intelligence table (FrontMatter/genai-use.tex)
+\genaiusepage{true}
+%   Dedication (FrontMatter/dedication.tex)
+\dedicationpage{true}

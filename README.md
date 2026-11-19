@@ -69,7 +69,7 @@ The back cover follows the cover code: programmes with their own back cover use 
 
 Every NOVA IMS programme in the upstream template already has a cover in the identity NOVA IMS introduced in 2025, except Geospatial Technologies, which keeps the earlier Erasmus Mundus design. This template offers both:
 
-- `\covercode{MGT-EN}`: the current official cover and back cover, unchanged.
+- `\covercode{MGT-EN}`: the current official cover artwork and back cover, unchanged. The title is set in bold italic capitals and the author's name sits between two blue bars.
 - `\covercode{MGT-2025-EN}`: a proposal in the 2025 identity. It uses the official vector 2025 cover with the other programme's text removed, typesets "Master's Degree in Geospatial Technologies", adds a row of partner logos, and uses the official 2025 back cover.
 
 The partner logos of the programme (Universitat Jaume I, Universität Münster, Erasmus+) are included in `Figures/Logos`. Switch them on together with the cover:
@@ -91,8 +91,8 @@ A missing logo file shows as a labelled empty box, so the document still compile
 | --- | --- |
 | `main.tex` | Main document and order of all parts. |
 | `thesis-info.tex` | Title, author, student number, programme, supervisors, date, keywords, SDGs, cover. |
-| `novaims-thesis.cls` | Layout: covers, title page, statement of integrity, copyright page, headings, margins, references. |
-| `FrontMatter/` | Acknowledgements, Abstract, Resumo, acronyms. |
+| `novaims-thesis.cls` | Layout: covers, title page, statement of integrity, Use of Generative AI table, copyright page, headings, margins, references. |
+| `FrontMatter/` | Use of Generative AI table, dedication, acknowledgements, Abstract, Resumo, acronyms. |
 | `Chapters/` | Chapters 1 to 6 (examples of citations and tables in Chapter 2). |
 | `BackMatter/` | Declaration of Generative AI Use. |
 | `Appendices/` | Appendix A. Copy the file for more appendices. |
@@ -106,6 +106,9 @@ A missing logo file shows as a labelled empty box, so the document still compile
 - **Page layout:** A4, margins 3 cm (top, bottom) and 3.25 cm (left, right), line spacing 1.15, as in the NOVA IMS template.
 - **Citations:** `\citet{key}` gives Author (Year), `\citep{key}` gives (Author, Year). References are in APA author-year style (apacite), with "et al." from the first citation and DOIs as links.
 - **Sustainable Development Goals:** `\sdgs{4,9}` prints the SDG icons under the abstract. `\sdgs{}` hides them.
+- **Front matter:** after the cover, title page and copyright page come the Statement of Integrity (with space for a signature), Use of Generative Artificial Intelligence, Dedication, Acknowledgements, Abstract, Resumo, Index, Index of Tables, Index of Figures and the acronyms. The front matter pages are listed in the Index with roman page numbers.
+- **Optional pages:** `\genaiusepage{false}` and `\dedicationpage{false}` in `thesis-info.tex` remove the Use of Generative AI table and the dedication. Fill the table in `FrontMatter/genai-use.tex` with one `\genairow{Task}{yes|no}{Tool}` line per task.
+- **Supervisors and date:** one centred block per supervisor on the title page, `\supervisor{Name, PhD}{School\\University\\City, Country}` (and `\cosupervisor` in the same way). `\submissiondate[Day]{Month}{Year}` prints the full date; the day is optional.
 - **Compile part of the thesis:** use the `\includeonly` line at the top of `main.tex`.
 - **Engines:** pdfLaTeX (default), XeLaTeX and LuaLaTeX all work. Locally: `latexmk -pdf main.tex`.
 
